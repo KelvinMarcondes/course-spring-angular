@@ -1,12 +1,17 @@
 package com.marcondes.domains.enuns;
 
+import lombok.Getter;
+
 public enum Status {
 
     ABERTO(0, "ABERTO"),
     ANDAMENTO(1, "ANDAMENTO"),
     ENCERRADO(2, "ENCERRADO");
 
+    @Getter
     private Integer codigo;
+
+    @Getter
     private String descricao;
 
     public static Status toEnum(Integer cod){
@@ -24,14 +29,6 @@ public enum Status {
     Status(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 }
 
