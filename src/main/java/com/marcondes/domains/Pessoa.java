@@ -3,6 +3,8 @@ package com.marcondes.domains;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcondes.domains.enuns.Perfil;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
 @Entity
 public abstract class Pessoa implements Serializable {
 
