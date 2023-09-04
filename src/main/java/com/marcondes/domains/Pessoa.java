@@ -2,7 +2,6 @@ package com.marcondes.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcondes.domains.enuns.Perfil;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
