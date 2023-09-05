@@ -27,3 +27,6 @@ public class Tecnico extends Pessoa{
         addPerfil(Perfil.CLIENTE);
     }
 }
+
+
+
