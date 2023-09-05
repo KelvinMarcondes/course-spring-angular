@@ -1,5 +1,6 @@
 package com.marcondes.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcondes.domains.enuns.Perfil;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 public class Cliente extends Pessoa{
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Chamado> chamados = new ArrayList<>();
 
