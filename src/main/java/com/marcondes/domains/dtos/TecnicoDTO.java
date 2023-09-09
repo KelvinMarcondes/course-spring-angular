@@ -3,7 +3,9 @@ package com.marcondes.domains.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcondes.domains.Tecnico;
 import com.marcondes.domains.enuns.Perfil;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TecnicoDTO implements Serializable {
 
     protected Integer id;
@@ -25,11 +29,6 @@ public class TecnicoDTO implements Serializable {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
-
-
-    public TecnicoDTO() {
-        super();
-    }
 
     public TecnicoDTO(Tecnico obj) {
         this.id = obj.getId();
@@ -48,4 +47,5 @@ public class TecnicoDTO implements Serializable {
     public void addPerfil(Perfil perfil) {
         this.perfis.add(perfil.getCodigo());
     }
+
 }

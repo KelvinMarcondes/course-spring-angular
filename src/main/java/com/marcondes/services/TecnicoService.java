@@ -1,11 +1,9 @@
 package com.marcondes.services;
 
 import com.marcondes.domains.Tecnico;
-import com.marcondes.domains.dtos.TecnicoDTO;
 import com.marcondes.repositories.TecnicoRepository;
 import com.marcondes.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class TecnicoService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto Não encontrado! Id: " + id));
     }
 
-    public List<ResponseEntity<TecnicoDTO>> findAll() {
-    return null;
+    public List<Tecnico> findAll() {
+        return tecnicoRepository.findAll();
     }
 }

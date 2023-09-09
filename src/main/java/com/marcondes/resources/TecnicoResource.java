@@ -1,4 +1,5 @@
 package com.marcondes.resources;
+
 import com.marcondes.domains.Tecnico;
 import com.marcondes.domains.dtos.TecnicoDTO;
 import com.marcondes.services.TecnicoService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/tecnicos")
@@ -25,7 +27,10 @@ public class TecnicoResource {
     }
 
     @GetMapping
-    public List<ResponseEntity<TecnicoDTO>> findAll(){
-        return null;
+    public ResponseEntity<List<TecnicoDTO>> findAll(){
+        List<Tecnico> tecnicoList = tecnicoService.findAll();
+        List<TecnicoDTO> tecnicoDTOList = tecnicoList.stream().map(TecnicoDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(tecnicoDTOList);
     }
+
 }
