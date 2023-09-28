@@ -18,26 +18,32 @@ import java.util.stream.Collectors;
 public class TecnicoResource {
 
     @Autowired
-    private TecnicoService tecnicoService;
+    private TecnicoService service;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){
-        Tecnico obj = tecnicoService.findById(id);
+        Tecnico obj = service.findById(id);
         return ResponseEntity.ok().body(new TecnicoDTO(obj));
     }
 
     @GetMapping
     public ResponseEntity<List<TecnicoDTO>> findAll(){
-        List<Tecnico> tecnicoList = tecnicoService.findAll();
+        List<Tecnico> tecnicoList = service.findAll();
         List<TecnicoDTO> tecnicoDTOList = tecnicoList.stream().map(TecnicoDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(tecnicoDTOList);
     }
 
     @PostMapping
-    public ResponseEntity<TecnicoDTO> createTecnico(@Valid @RequestBody TecnicoDTO objDTO){
-        Tecnico newOBJ = tecnicoService.create(objDTO);
+    public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO){
+        Tecnico newOBJ = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newOBJ.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public  ResponseEntity<TecnicoDTO> update (@PathVariable Integer id, @Valid @RequestBody TecnicoDTO objDTO){
+        Tecnico tecnico = service.update(id, objDTO);
+        return ResponseEntity.ok().body(new TecnicoDTO(tecnico));
     }
 
 }

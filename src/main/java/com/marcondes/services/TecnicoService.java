@@ -17,24 +17,33 @@ import java.util.Optional;
 public class TecnicoService {
 
     @Autowired
-    TecnicoRepository tecnicoRepository;
+    TecnicoRepository repository;
+
     @Autowired
     PessoaRepository pessoaRepository;
 
     public Tecnico findById(Integer id){
-        Optional<Tecnico> obj = tecnicoRepository.findById(id);
+        Optional<Tecnico> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto Não encontrado! Id: " + id));
     }
 
     public List<Tecnico> findAll() {
-        return tecnicoRepository.findAll();
+        return repository.findAll();
     }
 
     public Tecnico create(TecnicoDTO objDTO) {
         objDTO.setId(null);
         validaPorEmailECpf(objDTO);
         Tecnico newObj = new Tecnico(objDTO);
-        return tecnicoRepository.save(newObj);
+        return repository.save(newObj);
+    }
+
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico tecnico = findById(id);
+        validaPorEmailECpf(tecnicoDTO);
+        tecnico = new Tecnico(tecnicoDTO);
+        return repository.save(tecnico);
     }
 
     private void validaPorEmailECpf(TecnicoDTO objDTO) {
@@ -48,4 +57,5 @@ public class TecnicoService {
             throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
         }
     }
+
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcondes.domains.enuns.Perfil;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public abstract class Pessoa implements Serializable {
     @Column
     protected String nome;
 
+    @CPF
     @Column(unique = true)
     protected String cpf;
 
