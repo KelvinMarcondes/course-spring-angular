@@ -14,8 +14,10 @@ public class ChamadoDTO implements Serializable {
 
     private Integer id;
     @JsonFormat(pattern = "dd/MM/yyyy")
+
     private LocalDate dataAbertura = LocalDate.now();
     @JsonFormat (pattern = "dd/MM/yyyy")
+
     private LocalDate dataFechamento;
     private Integer prioridade;
     private Integer status;

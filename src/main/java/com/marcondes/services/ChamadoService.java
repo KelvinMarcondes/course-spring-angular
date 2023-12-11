@@ -11,6 +11,9 @@ import com.marcondes.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +35,16 @@ public class ChamadoService {
         return repository.findAll();
     }
 
-    public Chamado create(ChamadoDTO chamadoDTO) {
+    public Chamado create(@Valid ChamadoDTO chamadoDTO) {
         return repository.save(newChamado(chamadoDTO));
+    }
+
+    public Chamado update(Integer id, ChamadoDTO chamadoDTO) {
+        chamadoDTO.setId(id);
+        Chamado chamado = findById(id);
+        chamado = newChamado(chamadoDTO);
+        return repository.save(chamado);
+
     }
 
     private Chamado newChamado(ChamadoDTO chamadoDTO){
@@ -44,6 +55,9 @@ public class ChamadoService {
 
         if (chamadoDTO.getId() != null){
             chamado.setId(chamadoDTO.getId());
+        }
+        if (chamadoDTO.getStatus().equals(2)){
+            chamado.setDataFechamento(LocalDate.now());
         }
 
         chamado.setTecnico(tecnico);

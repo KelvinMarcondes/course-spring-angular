@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/chamados")
-public class ChamadoResources {
+public class ChamadoResource {
 
     @Autowired
     private ChamadoService service;
@@ -39,6 +39,12 @@ public class ChamadoResources {
         Chamado obj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("{/id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public  ResponseEntity<ChamadoDTO> update(@PathVariable Integer id, @Valid @RequestBody ChamadoDTO chamadoDTO){
+        Chamado newChamado = service.update(id, chamadoDTO);
+        return  ResponseEntity.ok().body(new ChamadoDTO(newChamado));
     }
 
 
